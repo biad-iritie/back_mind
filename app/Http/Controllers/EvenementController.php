@@ -9,7 +9,7 @@ use Illuminate\Database\QueryException;
 use App\Models\Ticket;
 use JWTAuth;
 use App\Http\Resources\EvenementResource;
-use Illuminate\Support\Facades\Storage;
+use Storage;
 
 class EvenementController extends Controller
 {
@@ -62,14 +62,17 @@ class EvenementController extends Controller
             $meme = explode("/", $meme);
 			$meme = explode(";", $meme[1]);
             $type = $meme[0];
-            
-            $path = Storage::disk('images')->put('', base64_decode($image));
+            $name_image = time().'.png';
+            //var_dump(base64_decode($image));
+            $result_upload = Storage::disk('public')->put($name_image,base64_decode($image));
+            ///dd(storage_path('app/public/event').'/'.$name_image);
+            //$im = base64_decode($image);
+            //$path = $im->store(config('images.path'),'public');
 
-            if ($request->input('type_user_id') == 1) {
+            if ($request->input('type_user_id') == 1 && $result_upload) {
                 if (sizeof($tickets) > 0) {
                     $evenement = new Evenement();
                     $evenement ->user_id =$request->input('user_id');
-                    $evenement ->type_user_id =$request->input('type_user_id');
                     $evenement ->type_event_id =$request->input('type_event_id');
                     $evenement ->lib_event =$request->input('lib_event');
                     $evenement ->lieu_event =$request->input('lieu_event');
@@ -78,7 +81,7 @@ class EvenementController extends Controller
                     $evenement ->datefin_event =$request->input('datefin_event');
                     $evenement ->heuredebut_event =$request->input('heuredebut_event');
                     $evenement ->heurefin_event =$request->input('heurefin_event');
-                    $evenement ->image_event =$path;
+                    $evenement ->image_event =$name_image;
 
 
                     if ($evenement->save()) {
