@@ -26,6 +26,7 @@ class CreateEvenementsTable extends Migration
             $table->time('heurefin_event');
             $table->string('image_event');
             $table->timestamps();
+            $table->boolean('statut');
         });
     }
 

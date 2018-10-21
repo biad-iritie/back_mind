@@ -70,8 +70,16 @@ class CreateForeignKeys extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });
+  
+        //TABLE TICKET_Buy
+    Schema::table('ticket_buys', function (Blueprint $table) {
+        $table->foreign('event_id')->references('id')->on('evenements')
+            ->onDelete('restrict')
+            ->onUpdate('restrict');
+            
+    });
     }
-
+ 
     /**
      * Reverse the migrations.
      *

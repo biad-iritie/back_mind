@@ -16,7 +16,7 @@ class Evenement extends Model
     protected $fillable = [
         'id','user_id', 'type_event_id','lib_event', 'description_event','datedebut_event',
         'lieu_event', 
-        'datefin_event','heuredebut_event', 'heurefin_event','image_event'
+        'datefin_event','heuredebut_event', 'heurefin_event','image_event','statut'
     ];
     /**
      * The attributes that should be hidden for arrays.

@@ -32,6 +32,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     
     Route::post('evenement','EvenementController@store');
     Route::apiResource('achat', 'AchatController');
+    Route::apiResource('ticket', 'TicketController');
     
     
 });

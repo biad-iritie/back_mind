@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAchatsTable extends Migration
+class CreateTicketBuysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateAchatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('achats', function (Blueprint $table) {
+        Schema::create('ticket_buys', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('ticket_id')->unsigned();
-            $table->integer('operateur_id')->unsigned();
-            $table->integer('nbr_ticket');
-            $table->string('montant_achat');
+            $table->integer('user_id');
+            $table->integer('ticket_id');
+            $table->integer('event_id')->unsigned();
+            $table->integer('receveur_id');
+            $table->integer('qrcode');
+            
             $table->string('numero_transaction');
-            $table->string('numero_achat');
-            $table->boolean('status_achat');
+            $table->boolean('statut');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateAchatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('achats');
+        Schema::dropIfExists('ticket_buys');
     }
 }

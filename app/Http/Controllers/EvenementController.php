@@ -26,7 +26,15 @@ class EvenementController extends Controller
      */
     public function index()
     {
-        return EvenementResource::collection(Evenement::all());
+        $categorie = htmlspecialchars($_GET["cat"]) ;
+ //dd();
+        if($categorie == ""){
+            return EvenementResource::collection(Evenement::all());
+        }else {
+            return EvenementResource::collection(Evenement::where('type_event_id','=',$categorie)->get());
+        }
+
+        
     }
 
     /**
@@ -82,6 +90,7 @@ class EvenementController extends Controller
                     $evenement ->heuredebut_event =$request->input('heuredebut_event');
                     $evenement ->heurefin_event =$request->input('heurefin_event');
                     $evenement ->image_event =$name_image;
+                    $evenement ->statut = true;
 
 
                     if ($evenement->save()) {
